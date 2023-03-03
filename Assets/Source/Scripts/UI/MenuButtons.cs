@@ -13,6 +13,6 @@ public class MenuButtons : MonoBehaviour
 
     private void HideMenuTabs()
     {
-        _menuTabs. ForEach(tab => tab.gameObject.SetActive(false));
+        _menuTabs.ForEach(tab => tab.SetActive(false));
     }
 }
