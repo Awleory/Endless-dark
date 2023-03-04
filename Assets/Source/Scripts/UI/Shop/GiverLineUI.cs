@@ -35,6 +35,7 @@ public class GiverLineUI : ListLineStoreBoughtUI
     protected override void OnBuyButtonClick()
     {
         _perPeriodGiver.TryBuy();
+        base.OnBuyButtonClick();
     }
 
     protected override void UpdateText()
@@ -47,5 +48,10 @@ public class GiverLineUI : ListLineStoreBoughtUI
     private void OnGiverLevelUp()
     {
         UpdateText();
+    }
+
+    protected override bool CanBuy()
+    {
+        return Currency.Gold >= _perPeriodGiver.Price;
     }
 }

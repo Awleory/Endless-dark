@@ -284,7 +284,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 847022619}
-  - component: {fileID: 847022618}
   m_Layer: 0
   m_Name: UpgradesConfig
   m_TagString: Untagged
@@ -292,23 +291,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &847022618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 847022617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156351f1939fb08418cc6fc59a78f73e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _upgradeConfigs:
-  - {fileID: 4440688769972082451, guid: 06b51bf32420e6d46b347d0e60060c1b, type: 3}
-  - {fileID: 4440688769972082451, guid: eea4a76ef33718541b10090758b0b442, type: 3}
-  - {fileID: 4440688769972082451, guid: a8985ecde61b9f84ab2e4aee8e1f5cda, type: 3}
-  - {fileID: 4440688769972082451, guid: 7cccbd841801c674bb2852cfa9d7455a, type: 3}
 --- !u!4 &847022619
 Transform:
   m_ObjectHideFlags: 0
@@ -603,6 +585,7 @@ MonoBehaviour:
   _upgradeConfigs:
   - {fileID: 4440688769972082451, guid: eea4a76ef33718541b10090758b0b442, type: 3}
   _giverLineTemplate: {fileID: 4926133632136129230, guid: f5c326b8a0a74ba4384668641a0eab2e, type: 3}
+  _content: {fileID: 0}
 --- !u!114 &2107724704 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6402017514098829011, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}

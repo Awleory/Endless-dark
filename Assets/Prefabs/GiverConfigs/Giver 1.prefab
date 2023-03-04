@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3876026171822745719}
   - component: {fileID: 4440688769972082451}
   m_Layer: 0
-  m_Name: UpgradeConfig 3
+  m_Name: Giver 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99670ea044ef8e94db57b52461bead93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _title: 333
-  _description: gfgdfgdg
-  _startPrice: 0
-  _startGoldBonus: 0
+  _title: "\u0427\u0442\u043E-\u0442\u043E 1"
+  _description: "\u0414\u0430\u0435\u0442 \u0432\u0430\u0443"
+  _startPrice: 2
+  _startGoldBonus: 2
   _startLevel: 1

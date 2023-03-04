@@ -138,7 +138,6 @@ GameObject:
   - component: {fileID: 6402017512092244101}
   - component: {fileID: 6402017512092244152}
   - component: {fileID: 6402017512092244155}
-  - component: {fileID: 6402017512092244153}
   m_Layer: 5
   m_Name: ListMenu
   m_TagString: Untagged
@@ -206,21 +205,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6402017512092244153
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402017512092244100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8886ed4f96d0b7468781eef9c991a67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cells: []
-  _listMenuLineTamplate: {fileID: 8210145953410923933, guid: 7197dafec646eec49b21ef121c66402f, type: 3}
-  _container: {fileID: 6402017513008907653}
 --- !u!1 &6402017512181785322
 GameObject:
   m_ObjectHideFlags: 0

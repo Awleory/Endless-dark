@@ -18,7 +18,7 @@ public static class Inventory
 
     private static void CalculateBonus()
     {
-        double bonusPerClick = 12345;
+        double bonusPerClick = 1;
         double bonusPerSecond = 0;
 
         foreach (var giver in _perPeriodGivers)
