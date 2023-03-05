@@ -1,11 +1,14 @@
 
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GiverShop : TabUI
 {
-    [SerializeField] private List<UpgradeConfig> _upgradeConfigs;
-    [SerializeField] private GiverLineUI _giverLineTemplate;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private string _title;
+    [SerializeField] private List<ElementConfig> _elementConfigs;
+    [SerializeField] private ListElementUI<Giver> _lineTemplate;
     [SerializeField] private Transform _content;
 
     private void Awake()
@@ -15,12 +18,14 @@ public class GiverShop : TabUI
 
     private void Initialize()
     {
-        foreach (var upgrade in _upgradeConfigs)
-        {
-            GiverLineUI element = Instantiate(_giverLineTemplate, _content);
-            GiverPerPeriod giver = new GiverPerPeriod(upgrade.StartPrice, upgrade.StartGoldBonus, upgrade.StartLevel);
-            element.Initialize(upgrade.Title, upgrade.Description, giver);
+        if (_titleText != null)
+            _titleText.text = _title;
 
+        foreach (var elementConfig in _elementConfigs)
+        {
+            ListElementUI<Giver> element = Instantiate(_lineTemplate, _content);
+            Giver giver = new(elementConfig);
+            element.Initialize(giver);
             Inventory.AddGiver(giver);
         }
     }
