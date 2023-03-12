@@ -5,20 +5,23 @@ public static class Inventory
 {
     public static double GoldBonusPerClick { get; private set; } = 1;
     public static double GoldBonusPerSecond { get; private set; }
+    public static double GiversGoldBonus { get; private set; }
 
     private static readonly List<Giver> _givers = new();
 
     public static void AddGiver(Giver giver)
     {
         _givers.Add(giver);
-        giver.Changed += OnGiverChanged;
-
-        CalculateBonus();
     }
 
-    private static void CalculateBonus()
+    public static void RemoveGiver(Giver giver)
     {
-        double bonusPerClick = 1;
+        if (_givers.Contains(giver))
+            _givers.Remove(giver);
+    }
+
+    public static void CalculateGiversBonus()
+    {
         double bonusPerSecond = 0;
 
         foreach (var giver in _givers)
@@ -26,12 +29,13 @@ public static class Inventory
             bonusPerSecond += giver.GoldBonus;
         }
 
-        GoldBonusPerClick = bonusPerClick;
-        GoldBonusPerSecond = bonusPerSecond;
+        GiversGoldBonus = bonusPerSecond;
+
+        CalculateBonus();
     }
 
-    private static void OnGiverChanged()
+    private static void CalculateBonus()
     {
-        CalculateBonus();
+        GoldBonusPerSecond = GiversGoldBonus;
     }
 }

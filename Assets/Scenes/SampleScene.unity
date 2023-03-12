@@ -439,6 +439,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6402017512092244155, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}
+      propertyPath: m_Color.b
+      value: 0.46226418
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402017512092244155, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}
+      propertyPath: m_Color.g
+      value: 0.27212533
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402017512092244155, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}
+      propertyPath: m_Color.r
+      value: 0.37616825
+      objectReference: {fileID: 0}
+    - target: {fileID: 6402017512092244155, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6402017513405159037, guid: ae07a08cf2d13d64384b9074e24bde06, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -506,10 +522,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _titleText: {fileID: 902162190}
   _title: Shop
+  _content: {fileID: 485064972}
+  _lineTemplate: {fileID: 8416691520122371111, guid: f5c326b8a0a74ba4384668641a0eab2e, type: 3}
   _elementConfigs:
   - {fileID: 152637311069379782, guid: 06b51bf32420e6d46b347d0e60060c1b, type: 3}
-  _lineTemplate: {fileID: 8416691520122371111, guid: f5c326b8a0a74ba4384668641a0eab2e, type: 3}
-  _content: {fileID: 485064972}
+  - {fileID: 152637311069379782, guid: 51a69a32c1e480c47af19f9fd06cc074, type: 3}
+  - {fileID: 152637311069379782, guid: 24a585822851c934fa13bee709580810, type: 3}
+  - {fileID: 152637311069379782, guid: 5a4716f6516b1e5419b955561498a99e, type: 3}
+  - {fileID: 152637311069379782, guid: 119147c4f0df5d44dac9d944bb3a0d06, type: 3}
+  - {fileID: 152637311069379782, guid: 59b0ce5be8cfe954c8412681dc0f5ff5, type: 3}
+  - {fileID: 152637311069379782, guid: f56d4b29f1411514890164be0175fe2b, type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

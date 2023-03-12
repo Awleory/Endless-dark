@@ -4,22 +4,49 @@ public class Giver : ElementModel
     public double GoldBonus { get; private set; }
 
     private readonly double _startGoldBonus;
-    private const float _priceGrowMultiplier = 1.07f;
     private const string _description = "";
+    private readonly Giver _previousGiver;
 
-    public Giver(string title, double startGoldBonus, int startLevel = 1, double startPrice = 0) : base(title, _description, startLevel, startPrice, _priceGrowMultiplier)
+    public Giver(string title, double startGoldBonus, int startLevel, double startPrice, float priceGrowMultiplier,
+        AvailableStatus availableStatus, Giver previousGiver = null) 
+        : base(title, _description, startLevel, startPrice, priceGrowMultiplier, availableStatus)
     {
         _startGoldBonus = startGoldBonus;
+        Update();
+
+        Inventory.AddGiver(this);
+
+        if (previousGiver != null)
+        {
+            _previousGiver = previousGiver;
+            _previousGiver.AvailableStatusChanged += OnPreviousGiverStatusChanged;
+        }
     }
 
-    public Giver(ElementConfig elementConfig) : base(elementConfig.Title, _description, elementConfig.StartLevel, elementConfig.StartPrice, _priceGrowMultiplier)
+    public Giver(ElementConfig elementConfig, AvailableStatus availableStatus, Giver previousGiver = null)
+        : this(elementConfig.Title, elementConfig.StartValue, elementConfig.StartLevel, elementConfig.StartPrice,
+              elementConfig.PriceGrowMultiplier, availableStatus, previousGiver)
+    { }
+
+    ~Giver()
     {
-        _startGoldBonus = elementConfig.StartValue;
+        Inventory.RemoveGiver(this);
+        _previousGiver.AvailableStatusChanged -= OnPreviousGiverStatusChanged;
     }
 
     protected override void Update()
     {
         base.Update();
         GoldBonus = Level * _startGoldBonus;
+    }
+
+    protected override void OnChanged()
+    {
+        Inventory.CalculateGiversBonus();
+    }
+
+    private void OnPreviousGiverStatusChanged(ElementModel elementModel)
+    {
+        SetAvailableStatus(GiverShop.GetNextElementAvailableStatus(elementModel));
     }
 }

@@ -8,10 +8,12 @@ public class ElementConfig : MonoBehaviour
     [SerializeField] private double _startPrice;
     [SerializeField] private double _startValue;
     [SerializeField] private int _startLevel = 1;
+    [SerializeField] private float _priceGrowMultiplier = 1;
 
     public string Title => _title;
     public string Description => _description;
     public double StartPrice => _startPrice;
     public double StartValue => _startValue;
     public int StartLevel => _startLevel;
+    public float PriceGrowMultiplier => _priceGrowMultiplier;
 }

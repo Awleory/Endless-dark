@@ -5,7 +5,7 @@ public static class Currency
 {
     public static event Action Changed;
 
-    public static double Gold { get; private set; }
+    public static double Gold { get; private set; } = 80000;
 
     public static void AddGold(double value)
     {

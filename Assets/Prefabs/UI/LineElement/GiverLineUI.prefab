@@ -190,6 +190,7 @@ MonoBehaviour:
   _description: {fileID: 0}
   _price: {fileID: 4540439939383065656}
   _level: {fileID: 7743428661638170010}
+  _background: {fileID: 2459838768218395813}
   _buyButton: {fileID: 5463231933400745287}
   _goldBonus: {fileID: 1041787315742449097}
 --- !u!1 &8139198267345606991
@@ -339,6 +340,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ListElementStoreBoughtUpgrable
       objectReference: {fileID: 0}
+    - target: {fileID: 2435623262572455596, guid: 6c32feaf16c84a34194e3cf9119ce69f, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4850201925705027108, guid: 6c32feaf16c84a34194e3cf9119ce69f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -434,6 +439,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2459838768218395813 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5205954869743548238, guid: 6c32feaf16c84a34194e3cf9119ce69f, type: 3}
+  m_PrefabInstance: {fileID: 7646089675544929259}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &2977793016199343567 stripped
