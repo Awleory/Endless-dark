@@ -1,5 +1,6 @@
 
 using System;
+using System.Data;
 using UnityEngine;
 
 public class Currency : Saveable
@@ -36,7 +37,8 @@ public class Currency : Saveable
     {
         CurrencyData currencyData = new()
         {
-            Gold = Gold
+            Gold = Gold,
+            SaveTime = DateTime.Now.ToString()
         };
 
         PlayerPrefs.SetString(ID, JsonUtility.ToJson(currencyData));
@@ -47,13 +49,25 @@ public class Currency : Saveable
         if (PlayerPrefs.HasKey(ID) == false)
             return;
 
-        CurrencyData currencyData = JsonUtility.FromJson<CurrencyData>(PlayerPrefs.GetString(ID));
+        CurrencyData saveData = JsonUtility.FromJson<CurrencyData>(PlayerPrefs.GetString(ID));
 
-        Gold = currencyData.Gold;
+        Gold = saveData.Gold;
+
+        if (DateTime.TryParse(saveData.SaveTime, out DateTime saveTime))
+            ProcessOfflineEarnings(saveTime);
+    }
+
+    private void ProcessOfflineEarnings(DateTime saveTime)
+    {
+        TimeSpan timeSpan = DateTime.Now - saveTime;
+        double offlineEarnings = timeSpan.Seconds * Inventory.GoldBonusPerSecond;
+        Gold += offlineEarnings;
+        Debug.Log($"offline earnings is {FormatNumsHelper.Format(offlineEarnings)}");
     }
 
     private struct CurrencyData
     {
         public double Gold;
+        public string SaveTime;
     }
 }

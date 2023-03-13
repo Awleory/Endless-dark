@@ -138,6 +138,17 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         if (_buyButton != null) _buyButton.gameObject.SetActive(lockState);
     }
 
+    private void UpdateBuyButton(bool goldAdded = true)
+    {
+        if (_buyButton == null || IsAvaliable == false)
+            return;
+
+        if (_buyButton.interactable != goldAdded)
+        {
+            _buyButton.interactable = _elementModel.CanBuy();
+        }
+    }
+
     private void OnBuyButtonClick()
     {
         _elementModel.TryBuy();
@@ -165,16 +176,5 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
     private void OnGoldSpent()
     {
         UpdateBuyButton(false);
-    }
-
-    private void UpdateBuyButton(bool goldAdded = true)
-    {
-        if (_buyButton == null || IsAvaliable == false)
-            return;
-
-        if (_buyButton.interactable != goldAdded)
-        {
-            _buyButton.interactable = _elementModel.CanBuy();
-        }
     }
 }
