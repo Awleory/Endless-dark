@@ -2,6 +2,7 @@
 public class Giver : ElementModel
 {
     public double GoldBonus { get; private set; }
+    public double StartGoldBonus => _startGoldBonus;
 
     private readonly double _startGoldBonus;
     private const string _description = "";
@@ -31,7 +32,9 @@ public class Giver : ElementModel
     ~Giver()
     {
         Inventory.RemoveGiver(this);
-        _previousGiver.AvailableStatusChanged -= OnPreviousGiverStatusChanged;
+
+        if (_previousGiver != null)
+            _previousGiver.AvailableStatusChanged -= OnPreviousGiverStatusChanged;
     }
 
     protected override void Update()

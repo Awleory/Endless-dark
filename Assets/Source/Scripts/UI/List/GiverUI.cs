@@ -9,6 +9,10 @@ public class GiverUI : ListElementUI<Giver>
     protected override void UpdateText()
     {
         base.UpdateText();
-        _goldBonus.text = FormatNumsHelper.Format(_elementModel.GoldBonus);
+
+        if (_elementModel.Obtained)
+            _goldBonus.text = FormatNumsHelper.Format(_elementModel.GoldBonus);
+        else
+            _goldBonus.text = FormatNumsHelper.Format(_elementModel.StartGoldBonus);
     }
 }

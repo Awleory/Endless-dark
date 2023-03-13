@@ -34,7 +34,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         if (_elementModel != null)
         {
             _elementModel.Changed += OnElementalModelChanged;
-            UpdateBuyStatus();
+            UpdateBuyButton();
         }
 
         if (_buyButton != null)
@@ -62,7 +62,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         _elementModel.AvailableStatusChanged += OnAvailableStatusChanged;
 
         UpdateText();
-        UpdateBuyStatus();
+        UpdateBuyButton();
 
         ProcessByAvialiableStatus(elementModel.AvailableStatus);
 
@@ -104,7 +104,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         _background.color = _originalBGColor;
 
         UpdateText();
-        UpdateBuyStatus();
+        UpdateBuyButton();
 
         gameObject.SetActive(true);
     }
@@ -135,7 +135,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         if (_buyButton != null) _buyButton.interactable = lockState;
     }
 
-    private void UpdateBuyStatus()
+    private void UpdateBuyButton()
     {
         if (IsAvaliable == false)
             return;
@@ -168,7 +168,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         }
 
         _checkBuyingAvailability = null;
-        UpdateBuyStatus();
+        UpdateBuyButton();
     }
 
     private void SetValue(ref object value, object newValue)
@@ -182,7 +182,7 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
     private void OnBuyButtonClick()
     {
         _elementModel.TryBuy();
-        UpdateBuyStatus();
+        UpdateBuyButton();
     }
 
     private void OnElementalModelChanged()
