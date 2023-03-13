@@ -2,8 +2,6 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System;
 
 public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : ElementModel
 {
@@ -15,22 +13,18 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
     [SerializeField] private Button _buyButton;
 
     public TElemenModel ElementModel => _elementModel;
-    public bool IsAvaliable => _elementModel != null && _elementModel.AvailableStatus == AvailableStatus.Available;
+    public bool IsAvaliable => _elementModel != null && _elementModel.AvailableStatus == AvailableStatus.Available && _enabled;
 
     protected TElemenModel _elementModel;
 
+    private bool _enabled = false;
     private Color _originalBGColor;
-    private Coroutine _checkBuyingAvailability = null;
-    private readonly WaitForSeconds _checkBuyingAvailabilityTimer = new(1);
     private readonly Color _notAbailableColor = Color.gray;
-
-    private void Awake()
-    {
-        _originalBGColor = _background.color;
-    }
 
     private void OnEnable()
     {
+        _enabled = true;
+
         if (_elementModel != null)
         {
             _elementModel.Changed += OnElementalModelChanged;
@@ -39,15 +33,23 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
 
         if (_buyButton != null)
             _buyButton.onClick.AddListener(OnBuyButtonClick);
+
+        CurrencyStatic.GoldAdded += OnGoldAdded;
+        CurrencyStatic.GoldSpent += OnGoldSpent;
     }
 
     private void OnDisable()
     {
+        _enabled = false;
+
         if (_elementModel != null)
             _elementModel.Changed -= OnElementalModelChanged;
 
         if (_buyButton != null)
             _buyButton.onClick.RemoveListener(OnBuyButtonClick);
+
+        CurrencyStatic.GoldAdded -= OnGoldAdded;
+        CurrencyStatic.GoldSpent -= OnGoldSpent;
     }
 
     private void OnDestroy()
@@ -58,15 +60,16 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
 
     public void Initialize(TElemenModel elementModel)
     {
+        _originalBGColor = _background.color;
+
         _elementModel = elementModel;
+        _elementModel.Changed += OnElementalModelChanged;
         _elementModel.AvailableStatusChanged += OnAvailableStatusChanged;
 
         UpdateText();
         UpdateBuyButton();
 
         ProcessByAvialiableStatus(elementModel.AvailableStatus);
-
-        enabled = true;
     }
 
     protected virtual void UpdateText()
@@ -132,57 +135,13 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
         if (_description != null) _description.enabled = lockState;
         if (_price != null) _price.enabled = lockState;
         if (_level != null) _level.enabled = lockState;
-        if (_buyButton != null) _buyButton.interactable = lockState;
-    }
-
-    private void UpdateBuyButton()
-    {
-        if (IsAvaliable == false)
-            return;
-
-        if (_buyButton == null)
-            return;
-
-        if (_elementModel.CanBuy())
-        {
-            _buyButton.interactable = true;
-        }
-        else
-        {
-            _buyButton.interactable = false;
-
-            if (_checkBuyingAvailability != null)
-            {
-                StopCoroutine(_checkBuyingAvailability);
-                _checkBuyingAvailability = null;
-            }
-            _checkBuyingAvailability = StartCoroutine(BuyStatusCoroutine());
-        }
-    }
-
-    private IEnumerator BuyStatusCoroutine()
-    {
-        while (_elementModel.CanBuy() == false)
-        {
-            yield return _checkBuyingAvailabilityTimer;
-        }
-
-        _checkBuyingAvailability = null;
-        UpdateBuyButton();
-    }
-
-    private void SetValue(ref object value, object newValue)
-    {
-        if (value == null)
-            return;
-
-        value = newValue;
+        if (_buyButton != null) _buyButton.gameObject.SetActive(lockState);
     }
 
     private void OnBuyButtonClick()
     {
         _elementModel.TryBuy();
-        UpdateBuyButton();
+        UpdateBuyButton(false);
     }
 
     private void OnElementalModelChanged()
@@ -196,5 +155,26 @@ public class ListElementUI<TElemenModel> : MonoBehaviour where TElemenModel : El
     private void OnAvailableStatusChanged(ElementModel elementModel)
     {
         ProcessByAvialiableStatus(elementModel.AvailableStatus);
+    }
+
+    private void OnGoldAdded()
+    {
+        UpdateBuyButton(true);
+    }
+
+    private void OnGoldSpent()
+    {
+        UpdateBuyButton(false);
+    }
+
+    private void UpdateBuyButton(bool goldAdded = true)
+    {
+        if (_buyButton == null || IsAvaliable == false)
+            return;
+
+        if (_buyButton.interactable != goldAdded)
+        {
+            _buyButton.interactable = _elementModel.CanBuy();
+        }
     }
 }

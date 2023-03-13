@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ElementConfig : MonoBehaviour
 {
+    [SerializeField] private string _id = "1";
     [SerializeField] private string _title;
     [SerializeField] private string _description;
     [SerializeField] private double _startPrice;
@@ -10,6 +11,7 @@ public class ElementConfig : MonoBehaviour
     [SerializeField] private int _startLevel = 1;
     [SerializeField] private float _priceGrowMultiplier = 1;
 
+    public string Id => _id;
     public string Title => _title;
     public string Description => _description;
     public double StartPrice => _startPrice;

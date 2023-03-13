@@ -1,23 +1,22 @@
 
 using System;
+using UnityEngine;
 
-public static class Currency
+public class Currency : Saveable
 {
-    public static event Action Changed;
+    public double Gold { get; private set; }
 
-    public static double Gold { get; private set; } = 80000;
+    public Currency(string id) : base(id) { }
 
-    public static void AddGold(double value)
+    public void AddGold(double value)
     {
         if (value < 0)
             throw new ArgumentOutOfRangeException(nameof(value));
 
         Gold += value;
-
-        Changed?.Invoke();
     }
 
-    public static void SpendGold(double value)
+    public void SpendGold(double value)
     {
         if (value < 0)
             throw new ArgumentOutOfRangeException(nameof(value));
@@ -26,11 +25,35 @@ public static class Currency
             throw new ArgumentOutOfRangeException(nameof(value));
 
         Gold -= value;
-        Changed?.Invoke();
     }
 
-    public static bool CanSpendGold(double value)
+    public bool CanSpendGold(double value)
     {
         return Gold >= value;
+    }
+
+    protected override void ProcessSave()
+    {
+        CurrencyData currencyData = new()
+        {
+            Gold = Gold
+        };
+
+        PlayerPrefs.SetString(ID, JsonUtility.ToJson(currencyData));
+    }
+
+    protected override void ProcessLoad()
+    {
+        if (PlayerPrefs.HasKey(ID) == false)
+            return;
+
+        CurrencyData currencyData = JsonUtility.FromJson<CurrencyData>(PlayerPrefs.GetString(ID));
+
+        Gold = currencyData.Gold;
+    }
+
+    private struct CurrencyData
+    {
+        public double Gold;
     }
 }

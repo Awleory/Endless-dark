@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class Inventory
 {
-    public static double GoldBonusPerClick { get; private set; } = 1;
+    public static double GoldBonusPerClick { get; private set; } = 1000;
     public static double GoldBonusPerSecond { get; private set; }
     public static double GiversGoldBonus { get; private set; }
 

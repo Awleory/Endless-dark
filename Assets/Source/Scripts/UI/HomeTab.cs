@@ -9,13 +9,13 @@ public class HomeTab : TabUI
 
     private void OnEnable()
     {
-        Currency.Changed += OnCurrencyChanged;
+        CurrencyStatic.Changed += OnCurrencyChanged;
         UpdateText();
     }
 
     private void OnDisable()
     {
-        Currency.Changed -= OnCurrencyChanged;
+        CurrencyStatic.Changed -= OnCurrencyChanged;
     }
 
     private void OnCurrencyChanged()
@@ -25,7 +25,7 @@ public class HomeTab : TabUI
 
     private void UpdateText()
     {
-        _goldValue.text = FormatNumsHelper.Format(Currency.Gold);
+        _goldValue.text = FormatNumsHelper.Format(CurrencyStatic.Gold);
         _goldPerSecond.text = FormatNumsHelper.Format(Inventory.GoldBonusPerSecond);
     }
 }

@@ -1,11 +1,6 @@
 
 public class GiverShop : Shop<Giver>
 {
-    private void Awake()
-    {
-        Initialize();
-    }
-
     public override void Initialize()
     {
         base.Initialize();

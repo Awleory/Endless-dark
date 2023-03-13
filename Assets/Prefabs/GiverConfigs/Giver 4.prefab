@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e2adf40921f2c49b52e2b8313d4ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _id: 4
   _title: "\u0428\u0442\u0443\u043A\u0430 4"
   _description: 
   _startPrice: 5008

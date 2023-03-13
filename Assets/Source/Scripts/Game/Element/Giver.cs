@@ -8,9 +8,9 @@ public class Giver : ElementModel
     private const string _description = "";
     private readonly Giver _previousGiver;
 
-    public Giver(string title, double startGoldBonus, int startLevel, double startPrice, float priceGrowMultiplier,
+    public Giver(string id, string title, double startGoldBonus, int startLevel, double startPrice, float priceGrowMultiplier,
         AvailableStatus availableStatus, Giver previousGiver = null) 
-        : base(title, _description, startLevel, startPrice, priceGrowMultiplier, availableStatus)
+        : base(id, title, _description, startLevel, startPrice, priceGrowMultiplier, availableStatus)
     {
         _startGoldBonus = startGoldBonus;
         Update();
@@ -25,7 +25,7 @@ public class Giver : ElementModel
     }
 
     public Giver(ElementConfig elementConfig, AvailableStatus availableStatus, Giver previousGiver = null)
-        : this(elementConfig.Title, elementConfig.StartValue, elementConfig.StartLevel, elementConfig.StartPrice,
+        : this(elementConfig.Id, elementConfig.Title, elementConfig.StartValue, elementConfig.StartLevel, elementConfig.StartPrice,
               elementConfig.PriceGrowMultiplier, availableStatus, previousGiver)
     { }
 
@@ -41,6 +41,16 @@ public class Giver : ElementModel
     {
         base.Update();
         GoldBonus = Level * _startGoldBonus;
+    }
+
+    protected override void ProcessLoad()
+    {
+        base.ProcessLoad();
+
+        if (_previousGiver != null)
+            SetAvailableStatus(Shop<ElementModel>.GetNextElementAvailableStatus(_previousGiver));
+        else
+            SetAvailableStatus(AvailableStatus.Available);
     }
 
     protected override void OnChanged()
